@@ -561,9 +561,9 @@ window.AUTO = (function () {
       const tag = x => x.at < now ? `<span class="tg red">فات الموعد ${left(now - x.at)}</span>` : `<span class="tg ${x.sev}">باقي ${left(x.at - now)}</span>`;
       if (routeItems.length) groups.push({ id:'route', ic:'🚌', sev:sevOf(routeItems), t:'أرسل مسار الرحلة للكباتن', sub:'آخر موعد قبل المغادرة بـ ' + LEAD_H + ' ساعات · الأفضل قبل الرحلة بيوم', go:TRIP, goT:'فتح مسار الرحلة',
         items:routeItems.map(x => ({ html:`<b>${esc2(nm(x.iq))}</b> <span dir="ltr">${esc2(x.duty)}</span><div>${esc2(x.cap)} · ${esc2(x.garage)} · ${esc2(x.txt)} · مغادرة ${fmt(x.dep)} · آخر موعد ${fmt(x.at)}</div>`, tag:tag(x), red:x.sev === 'red' })) });
-      if (busItems.length) groups.push({ id:'bus', ic:'🚍', sev:sevOf(busItems), t:'عيّن الحافلة قبل الخروج من الكراج', sub:'رقم الحافلة مطلوب قبل إرسال البطاقة', go:TRIP, goT:'فتح مسار الرحلة',
+      if (busItems.length) groups.push({ id:'bus', ic:'🚍', sev:sevOf(busItems), t:'عيّن الحافلة قبل الخروج من الكراج', sub:'رقم الحافلة مطلوب قبل إرسال جدول الرحلة', go:TRIP, goT:'فتح مسار الرحلة',
         items:busItems.map(x => ({ html:`<b dir="ltr">${esc2(x.duty)}</b><div>${esc2(x.garage)} · ${esc2(x.txt)} · الخروج ${fmt(x.at)}</div>`, tag:tag(x), red:x.sev === 'red' })) });
-      if (cardItems.length) groups.push({ id:'card', ic:'🪪', sev:sevOf(cardItems), t:'أرسل بطاقة الرحلة قبل الخروج', sub:'بعد التأكد من الحافلة · خلال ' + CARD_WIN_H + ' ساعات من الخروج', go:TRIP, goT:'فتح مسار الرحلة',
+      if (cardItems.length) groups.push({ id:'card', ic:'🪪', sev:sevOf(cardItems), t:'أرسل جدول الرحلة قبل الخروج', sub:'بعد التأكد من الحافلة · خلال ' + CARD_WIN_H + ' ساعات من الخروج', go:TRIP, goT:'فتح مسار الرحلة',
         items:cardItems.map(x => ({ html:`<b>${esc2(nm(x.iq))}</b> <span dir="ltr">${esc2(x.duty)}</span><div>${esc2(x.cap)} · ${esc2(x.garage)} · الخروج ${fmt(x.at)}${x.noBus ? ' · ⚠️ الحافلة غير معيّنة' : ''}</div>`, tag:tag(x), red:x.sev === 'red' })) });
       // ---------- نظام المخالفات: كباتن الرحلات القادمة ----------
       const iqs = Object.keys(rosterIq).slice(0, 600);
@@ -573,7 +573,7 @@ window.AUTO = (function () {
         const ns = fi.filter(x => x.notSent), wt = fi.filter(x => !x.notSent && x.count && !x.noted);
         if (ns.length) groups.push({ id:'fines', ic:'🚦', sev:'red', t:'أرسل المخالفات المرورية للكباتن قبل رحلاتهم', sub:'مخالفات مسجّلة ما وصلت الكابتن — من نظام المخالفات', go:FINES, goT:'فتح نظام المخالفات',
           items:ns.map(x => ({ html:`<b>${esc2(x.name || nm(x.iq))}</b><div>${x.notSent} مخالفة لم تُرسل · رحلة <span dir="ltr">${esc2(x.duty || '')}</span> · ${esc2(x.garage || '')}${x.exit ? ' · الخروج ' + fmt(x.exit) : ''}</div>`, tag:`<a class="au-go" href="${FINES}#driver=${encodeURIComponent(x.iq)}" target="_blank" rel="noopener">إرسال</a>`, red:true })) });
-        if (wt.length) groups.push({ id:'finesTalk', ic:'💬', sev:'org', t:'كلّم الكباتن عن مخالفات بانتظار إقرارهم', sub:'قبل إرسال البطاقة: يفتح الرسالة ويقرّ أو يعترض، ثم ضع ✔ في لوحة التوزيع', go:TRIP, goT:'فتح مسار الرحلة',
+        if (wt.length) groups.push({ id:'finesTalk', ic:'💬', sev:'org', t:'كلّم الكباتن عن مخالفات بانتظار إقرارهم', sub:'قبل إرسال جدول الرحلة: يفتح الرسالة ويقرّ أو يعترض، ثم ضع ✔ في لوحة التوزيع', go:TRIP, goT:'فتح مسار الرحلة',
           items:wt.map(x => ({ html:`<b>${esc2(x.name || nm(x.iq))}</b><div>${x.count} مخالفة بانتظار الإقرار · رحلة <span dir="ltr">${esc2(x.duty || '')}</span>${x.exit ? ' · الخروج ' + fmt(x.exit) : ''}</div>`, tag:'' })) });
       }
       // ---------- إدارة السائقين (للمشرف والمدير) ----------
