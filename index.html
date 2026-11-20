@@ -495,7 +495,7 @@ window.AUTO = (function () {
   const LEAD_H = 6, CARD_WIN_H = 3, DAYS_AHEAD = 1;
   const FINES_API = 'https://script.google.com/macros/s/AKfycbyhMGws-oWKytVX3_tG_C9SsEwvf6cyLzCJmuiRpm4OyCS3xYcoFmjFfxuRcOrNDTmxfw/exec';
   const TRIP = 'https://hanode40-sketch.github.io/trip/', FINES = 'https://hanode40-sketch.github.io/fines/', DRV = 'https://hanode40-sketch.github.io/all-op/drivers.html';
-  const GAR = [[/shumays|shumais|yanbu|jeddah|makkah|mecca|الشميسي|جدة|مكة|ينبع/i, 'الشميسي'], [/riyadh|الرياض/i, 'الرياض'], [/madinah|medina|المدينة/i, 'المدينة'], [/tabuk|haql|تبوك/i, 'تبوك'], [/jazan|jizan|جازان/i, 'جازان'], [/khamis|خميس/i, 'خميس مشيط'], [/hail|rafha|حائل/i, 'حائل'], [/bashayer|البشائر/i, 'البشائر'], [/buraydah|qassim|بريدة/i, 'بريدة']];
+  const GAR = [[/shumays|shumais|yanbu|jeddah|makkah|mecca|الشميسي|جدة|مكة|ينبع/i, 'الشميسي'], [/riyadh|الرياض/i, 'الرياض'], [/madinah|medina|rafha|المدينة|رفحاء/i, 'المدينة'], [/tabuk|haql|تبوك/i, 'تبوك'], [/jazan|jizan|جازان/i, 'جازان'], [/khamis|خميس/i, 'خميس مشيط'], [/hail|حائل/i, 'حائل'], [/bashayer|البشائر/i, 'البشائر'], [/buraydah|qassim|بريدة/i, 'بريدة']];
   const garOf = x => { for (const [re, g] of GAR) if (re.test(x || '')) return g; return ''; };
   const DEP = { 'Shumaysi':'الشميسي','Madinah':'المدينة','Tabuk':'تبوك','Riyadh':'الرياض','Jazan':'جازان','Khamis Mushait':'خميس مشيط','Al Bashayer':'البشائر','Buraydah':'بريدة','Hail':'حائل' };
   const EXIT_EARLY = [[/shuma?ys|shumais|الشميسي/i, 30]];
